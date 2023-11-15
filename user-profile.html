@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <style>
+            body{
+                margin: 1rem;
+            }
+
+            #button-display{
+                padding: 0.5rem;
+                background-color: #c0c0c0;
+                border: 1px solid black;
+                border-radius: 5px;
+                margin-bottom: 3rem;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: 0.1s ease-in;
+            }
+
+            #button-display:hover{
+                background-color: black;
+                color: #c0c0c0;
+            }
+
+            #profile-display{
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Profile Information</h2>
+        <button id="button-display">Release</button>
+        <div id="profile-display"></div>
+        <script>
+            const jsonData = [
+                {
+                    "userProfile": {
+                        "userID": 1,
+                        "username": "weronikaronnie",
+                        "fullName": "Weronika Ronnie",
+                        "age": 22,
+                        "email": "weronikaronnie@example.com",
+                        "address": {
+                            "street": "123 Main St",
+                            "city": "Toronto",
+                            "zipCode": "12345"
+                        },
+                        "phone": "647-123-4567",
+                        "subscriptionStatus": "Active",
+                        "subscriptionPlan": "Premium",
+                        "paymentInfo": {
+                            "cardType": "Visa",
+                            "cardNumber": "**** **** **** 1234",
+                            "expirationDate": "12/27",
+                            "billingAddress": {
+                                "street": "123 Main St",
+                                "city": "Toronto",
+                                "zipCode": "12345"
+                            }
+                        }
+                    }
+                },
+                {
+                    "userProfile": {
+                        "userID": 2,
+                        "username": "jamesbond",
+                        "fullName": "James Bond",
+                        "age": 54,
+                        "email": "jamesbond@example.com",
+                        "address": {
+                            "street": "456 Different St",
+                            "city": "Vancouver",
+                            "zipCode": "98765"
+                        },
+                        "phone": "123-456-7890",
+                        "subscriptionStatus": "Active",
+                        "subscriptionPlan": "Standard",
+                        "paymentInfo": {
+                            "cardType": "Mastercard",
+                            "cardNumber": "**** **** **** 9876",
+                            "expirationDate": "06/26",
+                            "billingAddress": {
+                                "street": "456 Different St",
+                                "city": "Vancouver",
+                                "zipCode": "98765"
+                            }
+                        }
+                    }
+                }
+            ];
+
+            // Extracting profile data from JSON
+            const profileData = jsonData;
+
+            // Displaying profile information
+            function displayProfile() {
+
+                // Where it will be displayed
+                const profileList = document.getElementById("profile-display");
+
+                // Clearing previous content
+                profileList.innerHTML = '';
+
+                // Looping through profile data
+                for (let i = 0; i < profileData.length; i++) {
+                    const profile= profileData[i].userProfile; 
+                    const profileElement = document.createElement("div");
+
+                    // Displaying profile information
+                    profileElement.innerHTML = `
+                        User ID: ${profile.userID}<br>
+                        Username: ${profile.username}<br>
+                        Full Name: ${profile.fullName}<br>
+                        Age: ${profile.age}<br>
+                        Email: ${profile.email}<br>
+                        Address: ${profile.address.street}, ${profile.address.city}, ${profile.address.zipCode}<br>
+                        Phone Number: ${profile.phone}<br>
+                        Subscription Status: ${profile.subscriptionStatus}<br>
+                        Subscription Plan: ${profile.subscriptionPlan}<br><br>
+                    `;
+
+                    // Appending profile information to display element
+                    profileList.appendChild(profileElement);
+                }
+            }
+
+        // Button triggering the display function
+        const displayButton = document.getElementById("button-display");
+        displayButton.addEventListener("click", displayProfile);
+
+        </script>
+    </body>
+</html>

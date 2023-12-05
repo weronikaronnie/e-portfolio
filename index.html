@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Task Manager</title>
+  <title>WebSocket Chat</title>
 </head>
 <body>
-    <h1>Tasks To Do</h1>
-    <input type="text" id="taskInput" placeholder="Enter task...">
-    <button onclick="addTask()">Add Task</button>
-    <ul id="taskList"></ul>
-    
-    <!-- JAVASCRIPT -->
-    <script src="task.js"></script>
+  <input type="text" id="messageInput" placeholder="Type a message...">
+  <button onclick="sendMessage()">Send</button>
+  <hr>
+  <div id="chatLog"></div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:8080');
+    ws.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        event.data.text().then((message) => {
+          const chatLog = document.getElementById('chatLog');
+          chatLog.innerHTML += `<p>${message}</p>`;
+        });
+      } else {
+        const chatLog = document.getElementById('chatLog');
+        chatLog.innerHTML += `<p>${event.data}</p>`;
+      }
+    };
+
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      ws.send(messageInput.value);
+      messageInput.value = '';
+    }
+  </script>
 </body>
 </html>

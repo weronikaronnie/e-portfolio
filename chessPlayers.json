@@ -1,0 +1,24 @@
+{
+  "chessPlayers": [
+    {
+      "name": "Magnus Carlsen",
+      "rating": 2853,
+      "age": 32
+    },
+    {
+      "name": "Fabiano Caruana",
+      "rating": 2791.2,
+      "age": 31
+    },
+    {
+      "name": "Vladimir Kramnik",
+      "rating": 2753.0,
+      "age": 48
+    },
+    {
+      "name": "Maxime Vachier-Lagrave",
+      "rating": 2732.0,
+      "age": 33
+    }
+  ]
+}

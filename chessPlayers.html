@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chess Players</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            body{
+                margin: 1rem;
+            }
+
+            #button-display{
+                padding: 0.5rem;
+                background-color: #c0c0c0;
+                border: 1px solid black;
+                border-radius: 5px;
+                margin-bottom: 3rem;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: 0.1s ease-in;
+            }
+
+            #button-display:hover{
+                background-color: black;
+                color: #c0c0c0;
+            }
+
+            #playerDetails{
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Chess Player Information</h2>
+        <script>
+            function loadChessPlayers() {
+            $.ajax({
+                url: "chessPlayers.json",
+                dataType: "json",
+                success: function(data) {
+                    // Extract chessPlayers array from the received JSON
+                    var players = data.chessPlayers;
+
+                    // Build the output
+                    var output = "<h2>Chess Players</h2><ul>";
+
+                    // Loop through chess players and create list items
+                    $.each(players, function(index, player) {
+                        output += "<li><strong>Name:</strong> " + player.name + ", <strong>Rating:</strong> " + player.rating + ", <strong>Age:</strong> " + player.age + "</li>";
+                    });
+
+                    output += "</ul>";
+
+                    // Display the output in the page
+                    $("#playerDetails").html(output);
+                },
+                error: function() {
+                    // If failed display error
+                    $("#playerDetails").html("<p>Error loading data</p>");
+                }
+            });
+        }
+        </script>
+            <!-- Button to trigger the AJAX request -->
+            <button class="button-display" onclick="loadChessPlayers()">Load Chess Players</button>
+            <div id="playerDetails"></div>
+    </body>
+</html>
